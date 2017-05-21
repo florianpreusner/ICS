@@ -160,7 +160,7 @@ class CalendarExport
                 }
 
                 // @todo
-                $this->stream->addItem('X-MICROSOFT-CDO-BUSYSTATUS:CONFIRMED');
+                $this->stream->addItem('X-MICROSOFT-CDO-BUSYSTATUS:FREE');
                 
                     if ($event->getRecurrenceRule() instanceof RecurrenceRule)
                         $this->stream->addItem($event->getRecurrenceRule()->__toString());
