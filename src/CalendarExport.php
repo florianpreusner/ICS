@@ -158,6 +158,9 @@ class CalendarExport
                         ->addItem('DTSTART;VALUE=DATE-TIME:'. $dtStart)
                         ->addItem('DTEND;VALUE=DATE-TIME:'. $dtEnd);
                 }
+
+                // @todo
+                $this->stream->addItem('X-MICROSOFT-CDO-BUSYSTATUS:CONFIRMED');
                 
                     if ($event->getRecurrenceRule() instanceof RecurrenceRule)
                         $this->stream->addItem($event->getRecurrenceRule()->__toString());
