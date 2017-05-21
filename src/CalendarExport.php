@@ -146,10 +146,19 @@ class CalendarExport
                     $this->formatter->getFormattedDate($event->getEnd()) :
                     $this->formatter->getFormattedDateTime($event->getEnd());
 
-                $this->stream->addItem('BEGIN:VEVENT')
-                    ->addItem('UID:'.$event->getUid())
-                    ->addItem('DTSTART:'. $dtStart)
-                    ->addItem('DTEND:'. $dtEnd);
+                if($event->isAllDay())
+                {
+                    $this->stream->addItem('BEGIN:VEVENT')
+                        ->addItem('UID:'.$event->getUid())
+                        ->addItem('DTSTART;VALUE=DATE:'. $dtStart)
+                        ->addItem('DTEND;VALUE=DATE:'. $dtEnd);
+                } else {
+                    $this->stream->addItem('BEGIN:VEVENT')
+                        ->addItem('UID:'.$event->getUid())
+                        ->addItem('DTSTART;VALUE=DATE-TIME:'. $dtStart)
+                        ->addItem('DTEND;VALUE=DATE-TIME:'. $dtEnd);
+                }
+
                 
                     if ($event->getRecurrenceRule() instanceof RecurrenceRule)
                         $this->stream->addItem($event->getRecurrenceRule()->__toString());
